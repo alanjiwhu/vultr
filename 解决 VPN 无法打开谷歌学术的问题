@@ -1,0 +1,24 @@
+1. 首先，找到最新的 Google IPv6 地址，可以在这里查看：IPv6-hosts
+
+找到 Google 学术对应的 IPv6 地址后，修改服务器的 hosts 文件，vim /etc/hosts，在文件的最后加入如下配置：
+
+## Scholar 学术搜索
+2404:6800:4008:c06::be scholar.google.com
+2404:6800:4008:c06::be scholar.google.com.hk
+2404:6800:4008:c06::be scholar.google.com.tw
+2404:6800:4005:805::200e scholar.google.cn #www.google.cn
+
+2. 然后，重启 shadowsocks 服务端程序：
+
+/etc/init.d/shadowsocks restart
+注：不同的搭建方式可能重启的方式不太一样。我的搭建方式请参考：shadowsocks服务端搭建
+
+之后，就能够正常访问谷歌学术的网站了。
+
+
+其他问题
+有些时候，到这里可能还是不能正常访问谷歌学术。这个可能是因为 Vultr 上 5 美元的 VPS 默认使用的是 IPv4 的地址，而没有启用 IPv6 的地址，
+所以需要给你的 VPS 分配一个 IPv6 的地址。Server Information -> Settings -> IPv6：给你的 Server 分配（assign）一个 IPv6 地址，
+分配一个 IPv6 地址是不要钱的。这个过程会重启你的 VPS，重启之后，能看到有一个 IPv6 的地址，如下图：
+
+我一开始就是因为没有给我的 VPS 分配 IPv6 地址，所以修改了服务器的 hosts 文件也还是没有解决这个问题。你在解决问题的时候注意要先分配 IPv6 地址哦！
